@@ -1,0 +1,25 @@
+{% extends "socle/base.jinja" %} 
+
+{% block extra_styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+{% endblock extra_styles %}
+
+{% block content %}
+<div class="container">
+    <h1 class="title">Projet Python - Flask</h1>
+    <button class="btnAjouter" onclick="location.href='{{ url_for('create_film') }}'">Ajouter un film</button>
+    <ul>
+        {% for film in films %}
+        <li>
+            <img src="{{ url_for('static', filename='images/' + film.image) }}">
+            <h3>{{ film.titre }}</h3>
+            <a href="{{ url_for('film_details', film_id=film.id) }}">Voir les détails</a>
+            <a href="{{ url_for('update_film', film_id=film.id) }}">Modifier</a>
+            <form action="{{ url_for('delete_film', film_id=film.id) }}" method="post" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce film ?');">
+                <button class="btnSupprimer" type="submit">Supprimer</button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock content %}

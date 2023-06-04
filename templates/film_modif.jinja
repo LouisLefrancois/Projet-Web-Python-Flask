@@ -1,0 +1,31 @@
+{% extends "socle/base.jinja" %} 
+
+{% block extra_styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles_modif.css') }}">
+{% endblock extra_styles %}
+
+{% block content %}
+    <h1>Modifier le film</h1>
+    <form action="{{ url_for('update_film', film_id=film.id) }}" method="post">
+        <label for="image">Image :</label>
+        <input type="text" id="image" name="image" value="{{ film.image }}"><br>
+
+        <label for="titre">Titre :</label>
+        <input type="text" id="titre" name="titre" value="{{ film.titre }}"><br>
+
+        <label for="description">Description :</label>
+        <textarea id="description" name="description">{{ film.description }}</textarea><br>
+
+        <label for="annee">Année :</label>
+        <input type="text" id="annee" name="annee" value="{{ film.annee }}"><br>
+
+        <label for="acteurs">Acteurs :</label>
+        <input type="text" id="acteurs" name="acteurs" value="{{ film.acteurs }}"><br>
+
+        <label for="realisation">Réalisateur / Producteur :</label>
+        <input type="text" id="realisation" name="realisation" value="{{ film.realisation }}"><br>
+
+        <button type="submit">Enregistrer</button>
+        <a href="{{ url_for('index') }}"><button type="button">Annuler</button></a>
+    </form>
+{% endblock content %}
